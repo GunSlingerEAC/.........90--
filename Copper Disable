@@ -1,0 +1,51 @@
+spawn(function()
+_G.CopperOreESP = false
+
+function checkCopperOre()
+local a = workspace.TargetFilter.Resources:getDescendants()
+for i=1,#a do
+if a[i].Name == "Copper deposit" then
+if not a[i]:findFirstChild("BillboardGui") then
+local BillboardGui = Instance.new("BillboardGui")
+local CopperOreESPLabel = Instance.new("TextLabel")
+BillboardGui.Parent = a[i]
+BillboardGui.Active = true
+BillboardGui.AlwaysOnTop = true
+BillboardGui.Size = UDim2.new(0, 200, 0, 50)
+BillboardGui.Adornee = a[i]
+CopperOreESPLabel.Parent = BillboardGui
+CopperOreESPLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+CopperOreESPLabel.BackgroundTransparency = 1
+CopperOreESPLabel.BorderSizePixel = 0
+CopperOreESPLabel.Size = UDim2.new(0, 100, 0, 50)
+CopperOreESPLabel.Font = Enum.Font.GothamBold
+CopperOreESPLabel.FontSize = Enum.FontSize.Size14
+CopperOreESPLabel.Text = "Copper Ore"
+CopperOreESPLabel.TextSize = 12
+CopperOreESPLabel.TextColor3 = Color3.new(1, 1, 1)
+CopperOreESPLabel.TextStrokeTransparency = 0
+spawn(function()
+while true do
+wait(0.1)
+if _G.CopperOreESP == true then
+CopperOreESPLabel.Visible = true
+else
+CopperOreESPLabel.Visible = false
+end
+end
+end)
+end
+end
+end
+end
+
+checkCopperOre()
+
+workspace.TargetFilter.Resources.ChildAdded:connect(function()
+checkCopperOre()
+end)
+
+workspace.TargetFilter.Resources.ChildAdded:connect(function()
+checkCopperOre()
+end)
+end)
